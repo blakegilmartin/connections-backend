@@ -12,6 +12,11 @@ const readById = async (id: number) => {
   return user;
 };
 
+const readAll = async () => {
+  const allUsers = await prisma.user.findMany({});
+  return allUsers;
+};
+
 const deleteById = async (id: number) => {
   const deleteRes = await prisma.user.delete({ where: { id } });
   return deleteRes;
@@ -22,4 +27,4 @@ const deleteAll = async () => {
   return deleteAllRes;
 };
 
-export default { create, readById, deleteById, deleteAll };
+export default { create, readById, readAll, deleteById, deleteAll };
