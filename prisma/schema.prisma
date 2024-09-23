@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  connections Connection[]
+  completedConnections CompletedConnection[]
+}
+
+model Connection {
+  id        Int     @id @default(autoincrement())
+  dateAdded DateTime @default(now())
+  categoryName1 String // Describes Cat
+  categoryName2 String
+  categoryName3 String
+  categoryName4 String
+
+  categoryAnswers1 String // "beautiful,smart,doctor,funny" -> 
+  categoryAnswers2 String
+  categoryAnswers3 String
+  categoryAnswers4 String
+
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+
+  CompletedConnection CompletedConnection[]
+}
+
+model CompletedConnection {
+  id Int @id @default(autoincrement())
+  
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+
+  connection Connection @relation(fields: [connectionId], references: [id])
+  connectionId Int
+
+  dateCompleted DateTime @default(now())
+}
