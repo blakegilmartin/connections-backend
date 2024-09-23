@@ -1,8 +1,9 @@
 import express, { Express, NextFunction, Request, Response } from "express";
 import dotenv from "dotenv";
-import userRouter from "./src/routes/user";
+import userRouter from "./src/routes/userRoutes";
 import bodyParser from "body-parser";
 import methodOverride from "method-override";
+import connectionRouter from "./src/routes/connectionRoutes";
 
 export const errorHandler = async (
   err: Error,
@@ -33,6 +34,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 app.use("/user", userRouter);
+app.use("/connection", connectionRouter);
 app.use(errorHandler);
 
 app.listen(port, () => {
