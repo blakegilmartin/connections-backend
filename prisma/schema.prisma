@@ -28,6 +28,8 @@ model Connection {
   categoryAnswers3 String
   categoryAnswers4 String
 
+  defaultLayout String
+
   author    User    @relation(fields: [authorId], references: [id])
   authorId  Int
 

@@ -4,6 +4,7 @@ import userRouter from "./src/routes/userRoutes";
 import bodyParser from "body-parser";
 import methodOverride from "method-override";
 import connectionRouter from "./src/routes/connectionRoutes";
+import cors from "cors";
 
 export const errorHandler = async (
   err: Error,
@@ -31,6 +32,7 @@ app.use(
 );
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use(methodOverride());
 
 app.use("/user", userRouter);
