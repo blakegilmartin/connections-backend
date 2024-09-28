@@ -14,15 +14,16 @@ export const convertOrderStringifyAnswer = (answer: string) => {
 const checkAttempt = async (id: number, attempt: string) => {
   const connection = await connectionDb.readById(id);
   const sortedAttemptString = convertOrderStringifyAnswer(attempt);
-  if (
-    connection?.categoryAnswers1 === sortedAttemptString ||
-    connection?.categoryAnswers2 === sortedAttemptString ||
-    connection?.categoryAnswers3 === sortedAttemptString ||
-    connection?.categoryAnswers4 === sortedAttemptString
-  )
-    return true;
+  if (connection?.categoryAnswers1 === sortedAttemptString)
+    return connection.categoryName1;
+  if (connection?.categoryAnswers2 === sortedAttemptString)
+    return connection.categoryName2;
+  if (connection?.categoryAnswers3 === sortedAttemptString)
+    return connection.categoryName3;
+  if (connection?.categoryAnswers4 === sortedAttemptString)
+    return connection.categoryName4;
 
-  return false;
+  return null;
 };
 
 export default { checkAttempt };
